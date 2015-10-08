@@ -3,19 +3,7 @@
 set -e
 
 SHADOWSOCKS_SCERET=${SHADOWSOCKS_SCERET:-gfw}
+SHADOWSOCKS_WORKERS=${SHADOWSOCKS_WORKERS:-1}
 
-cat >> /etc/shadowsocks/shadowsocks.json << EOF
-{
-    "server":"0.0.0.0",
-    "server_port": 80,
-    "local_address": "0.0.0.0",
-    "local_port": 1081,
-    "password":"$SHADOWSOCKS_SCERET",
-    "timeout":200,
-    "method":"aes-256-cfb"
-}
-
-EOF
-
-exec ssserver -c /etc/shadowsocks/shadowsocks.json
+exec ssserver -s 0.0.0.0 -p 80 -k $SHADOWSOCKS_SCERET -t 300 -m aes-256-cfb --fast-open --workers $SHADOWSOCKS_WORKERS
 

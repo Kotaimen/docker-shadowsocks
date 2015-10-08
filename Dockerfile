@@ -3,11 +3,9 @@ MAINTAINER  Kotaimen <kotaimen.c@gmail.com>
 
 ENV         DEBIAN_FRONTEND noninteractive
 
-RUN         apt-get update && \
-            apt-get install -y python-pip && \
+RUN         apt-get update -qq && \
+            apt-get install -yqq python-pip && \
             pip install shadowsocks
-
-WORKDIR     /etc/shadowsocks/
 
 EXPOSE      80
 ADD         docker_run.sh ./
