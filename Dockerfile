@@ -1,4 +1,4 @@
-FROM        ubuntu:14.04
+FROM        ubuntu-debootstrap:14.04
 MAINTAINER  Kotaimen <kotaimen.c@gmail.com>
 
 ENV         DEBIAN_FRONTEND noninteractive
