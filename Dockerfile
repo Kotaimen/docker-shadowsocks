@@ -3,7 +3,7 @@ MAINTAINER  Kotaimen <kotaimen.c@gmail.com>
 
 ENV         DEBIAN_FRONTEND noninteractive
 
-ENV         SHADOWSOCKS_VERSION 2.4.6
+ENV         SHADOWSOCKS_VERSION 2.4.7
 ENV         DEV_PACKAGES git-core build-essential autoconf libtool libssl-dev
 
 WORKDIR     /build
