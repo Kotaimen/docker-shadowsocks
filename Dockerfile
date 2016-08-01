@@ -1,27 +1,11 @@
-FROM        ubuntu:trusty
+FROM        debian:jessie
 MAINTAINER  Kotaimen <kotaimen.c@gmail.com>
 
-ENV         DEBIAN_FRONTEND noninteractive
 
-ENV         SHADOWSOCKS_VERSION 2.4.7
-ENV         DEV_PACKAGES git-core build-essential autoconf libtool libssl-dev
-
-WORKDIR     /build
-
-RUN         set -x \
-            && apt-get -q update \
-            && apt-get -yq install \
-                ${DEV_PACKAGES} \
-                curl \
-            && curl -sSL https://github.com/shadowsocks/shadowsocks-libev/archive/v${SHADOWSOCKS_VERSION}.tar.gz | tar xfz - \
-            && cd shadowsocks-libev-${SHADOWSOCKS_VERSION} \
-            && ./configure \
-            && make && make install \
-            && cd && rm -rf ${WORKDIR} \
-            && apt-get -yq remove ${DEV_PACKAGES} \
-            && apt-get -yq autoremove \
+RUN         echo 'deb http://httpredir.debian.org/debian sid main' >> /etc/apt/sources.list \
+            && apt-get -y update \
+            && apt-get -y install shadowsocks-libev \
             && rm -rf /var/lib/apt/lists/*
-            
-#EXPOSE      80
+
 ADD         docker_run.sh ./
 ENTRYPOINT  ["./docker_run.sh"]

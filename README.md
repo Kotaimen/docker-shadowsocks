@@ -5,9 +5,7 @@ Shadowsocks server in a docker container.
 
 Tags:
 
-- `alpine`: Original python version on Alpine Linux 3.3
-- `2.4.6` : shadowsocks-libev on ubuntu 14.04
-- `2.4.7`, `latest` : shadowsocks-libev on ubuntu 14.04
+- `2.4.8`, `latest` : `shadowsocks-libev` on `debian:jessie`
 
 Enviroment Variables (see shadowsocks-libev man page for more information):
 
