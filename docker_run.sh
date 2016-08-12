@@ -8,4 +8,4 @@ exec ss-server \
     -t ${SHADOWSOCKS_TIMEOUT:-10} \
     -m ${SHADOWSOCKS_ENCRYPTIONMETHOD:-aes-256-cfb} \
     -n ${SHADOWSOCKS_MAXOPENFILES:-1024} \
-    -k ${SHADOWSOCKS_SECRET}
+    -k ${SHADOWSOCKS_SECRET:-bob}
