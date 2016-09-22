@@ -1,7 +1,7 @@
 FROM        debian:jessie
 MAINTAINER  Kotaimen <kotaimen.c@gmail.com>
 
-ENV SHADOWSOCKS_VERSION=2.5.2
+ENV SHADOWSOCKS_VERSION=2.5.3
 
 # RUN         echo 'Acquire::http::Proxy "http://172.26.10.18:3142";' > /etc/apt/apt.conf.d/02proxy
 
