@@ -5,7 +5,8 @@ Shadowsocks server in a docker container.
 
 Tags:
 
-- `2.5.3`, `latest` : `shadowsocks-libev-2.5.3` on `debian:jessie`
+- `2.5.4`, `latest` : `shadowsocks-libev-2.5.4` on `debian:jessie`
+- `2.5.3` : `shadowsocks-libev-2.5.3` on `debian:jessie`
 - `2.5.2` : `shadowsocks-libev-2.5.2` on `debian:jessie`
 - `2.4.8` : `shadowsocks-libev-2.4.8` on `debian:jessie`
 
