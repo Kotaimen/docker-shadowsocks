@@ -3,8 +3,7 @@ Shadowsocks
 
 Tags:
 
-- `2.6.2-alpine` :
-- `2.5.6`, `latest` : `shadowsocks-libev-2.5.6` on `debian:jessie`
+- `2.6.2`
 
 By default, UDP relay, simple-obfs and OTA is enabled.
 
@@ -15,3 +14,4 @@ Environment Variables (see shadowsocks-libev man page for more information):
 - `SHADOWSOCKS_TIMEOUT`: socket timeout in seconds, default value is `300`.
 - `SHADOWSOCKS_ENCRYPTIONMETHOD`: encryption method, default value is `chacha20`.
 - `SHADOWSOCKS_MAXOPENFILES`: max open files, default value is `1000`.
+
