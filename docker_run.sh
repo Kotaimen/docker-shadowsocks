@@ -1,11 +1,12 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 set -e
 
-exec ss-server \
-    -u \
-    -p ${SHADOWSOCKS_PORT:-8388} \
-    -t ${SHADOWSOCKS_TIMEOUT:-10} \
-    -m ${SHADOWSOCKS_ENCRYPTIONMETHOD:-aes-256-cfb} \
-    -n ${SHADOWSOCKS_MAXOPENFILES:-1024} \
-    -k ${SHADOWSOCKS_SECRET:-bob}
+exec ss-server -v \
+    -s ${SHADOWSOCKS_HOST} \
+    -p ${SHADOWSOCKS_PORT} \
+    -k ${SHADOWSOCKS_PASSWORD} \
+    -t ${SHADOWSOCKS_TIMEOUT} \
+    -m ${SHADOWSOCKS_ENCRYPTIONMETHOD} \
+    --fast-open -u -A \
+    --plugin obfs-server --plugin-opts obfs=http
