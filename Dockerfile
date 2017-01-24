@@ -6,13 +6,6 @@ ARG         SS_URL=https://github.com/shadowsocks/shadowsocks-libev/archive/v${S
 ARG         OBFS_VER=0.0.2
 ARG         OBFS_URL=https://github.com/shadowsocks/simple-obfs/archive/v${OBFS_VER}.tar.gz
 
-ENV         SHADOWSOCKS_HOST 0.0.0.0
-ENV         SHADOWSOCKS_PORT 8388
-ENV         SHADOWSOCKS_PASSWORD bob180180180
-ENV         SHADOWSOCKS_TIMEOUT 300
-ENV         SHADOWSOCKS_ENCRYPTIONMETHOD chacha20
-ENV         SHADOWSOCKS_MAXOPENFILES 1000
-
 RUN set -ex \
     && apk add --no-cache \
         --virtual .build-deps \
@@ -52,7 +45,7 @@ RUN set -ex \
 
 USER        nobody
 
-EXPOSE      ${SHADOWSOCKS_PORT}/tcp ${SHADOWSOCKS_PORT}/udp
+EXPOSE      8388/tcp 8388/udp
 
 ADD         docker_run.sh ./
 CMD         ["./docker_run.sh"]
