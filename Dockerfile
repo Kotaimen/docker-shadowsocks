@@ -6,46 +6,49 @@ ARG         SS_URL=https://github.com/shadowsocks/shadowsocks-libev/archive/v${S
 ARG         OBFS_VER=0.0.2
 ARG         OBFS_URL=https://github.com/shadowsocks/simple-obfs/archive/v${OBFS_VER}.tar.gz
 
-RUN set -ex \
-    && apk add --no-cache \
-        --virtual .build-deps \
-        asciidoc \
-        autoconf \
-        build-base \
-        curl \
-        libtool \
-        linux-headers \
-        openssl-dev \
-        pcre-dev \
-        tar \
-        xmlto \
-    \
-    && mkdir -p /tmp/ss /tmp/obfs \
-    \
-    && cd /tmp/ss \
-    && curl -sSL $SS_URL | tar xz --strip 1 \
-    && ./configure --prefix=/usr --disable-documentation \
-    && make install \
-    \
-    && cd /tmp/obfs \
-    && curl -sSL $OBFS_URL | tar xz --strip 1 \
-    && ./configure --prefix=/usr --disable-documentation \
-    && make install \
-    \
-    && runDeps="$( \
-        scanelf --needed --nobanner /usr/bin/ss-* /usr/bin/obfs-* \
-            | awk '{ gsub(/,/, "\nso:", $2); print "so:" $2 }' \
-            | xargs -r apk info --installed \
-            | sort -u \
-    )" \
-    && apk add --no-cache --virtual .run-deps $runDeps \
-    \
-    && apk del .build-deps \
-    && cd / && rm -rf /tmp/*
+ENV         SS_PORT=8388
+
+RUN         set -ex \
+            && apk add --no-cache \
+                --virtual .build-deps \
+                asciidoc \
+                autoconf \
+                build-base \
+                curl \
+                libtool \
+                linux-headers \
+                openssl-dev \
+                pcre-dev \
+                tar \
+                xmlto \
+            \
+            && mkdir -p /tmp/ss /tmp/obfs \
+            \
+            && cd /tmp/ss \
+            && curl -sSL $SS_URL | tar xz --strip 1 \
+            && ./configure --prefix=/usr --disable-documentation \
+            && make install \
+            \
+            && cd /tmp/obfs \
+            && curl -sSL $OBFS_URL | tar xz --strip 1 \
+            && ./configure --prefix=/usr --disable-documentation \
+            && make install \
+            \
+            && runDeps="$( \
+                scanelf --needed --nobanner /usr/bin/ss-* /usr/bin/obfs-* \
+                    | awk '{ gsub(/,/, "\nso:", $2); print "so:" $2 }' \
+                    | xargs -r apk info --installed \
+                    | sort -u \
+            )" \
+            && apk add --no-cache --virtual .run-deps $runDeps \
+            \
+            && apk del .build-deps \
+            && cd / && rm -rf /tmp/*
 
 USER        nobody
 
-EXPOSE      8388/tcp 8388/udp
+EXPOSE      ${SS_PORT}/tcp ${SS_PORT}/udp
 
+# Start in server mode by default
 ADD         docker_run.sh ./
 CMD         ["./docker_run.sh"]
