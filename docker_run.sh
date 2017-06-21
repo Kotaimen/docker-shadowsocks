@@ -10,4 +10,4 @@ exec ss-server -v \
     -m ${SHADOWSOCKS_ENCRYPTIONMETHOD:-chacha20} \
     -n ${SHADOWSOCKS_MAXOPENFILES:-1000} \
     --fast-open -u \
-    --plugin obfs-server --plugin-opts obfs=http
+    --plugin obfs-server --plugin-opts obfs=${SIMPLE_OBFS_METHOD:http}
