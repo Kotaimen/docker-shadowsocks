@@ -1,36 +1,41 @@
-FROM        alpine:3.5
+FROM        alpine:3.6
 MAINTAINER  KOTAIMEN <kotaimen.c@gmail.com>
 
-ARG         SS_VER=2.6.2
-ARG         SS_URL=https://github.com/shadowsocks/shadowsocks-libev/archive/v${SS_VER}.tar.gz
-ARG         OBFS_VER=0.0.2
-ARG         OBFS_URL=https://github.com/shadowsocks/simple-obfs/archive/v${OBFS_VER}.tar.gz
+ARG         SS_VER=3.0.6
+ARG         SS_URL=https://github.com/shadowsocks/shadowsocks-libev/releases/download/v3.0.6/shadowsocks-libev-${SS_VER}.tar.gz
+#ARG         OBFS_VER=0.0.3
+ARG         OBFS_URL=https://github.com/shadowsocks/simple-obfs.git
 
 ENV         SS_PORT=8388
 
 RUN         set -ex \
             && apk add --no-cache \
                 --virtual .build-deps \
-                asciidoc \
                 autoconf \
+                automake \
                 build-base \
                 curl \
+                libev-dev \
                 libtool \
                 linux-headers \
-                openssl-dev \
+                udns-dev \
+                libsodium-dev \
+                mbedtls-dev \
                 pcre-dev \
                 tar \
-                xmlto \
+                git \
             \
-            && mkdir -p /tmp/ss /tmp/obfs \
-            \
+            && mkdir -p /tmp/ss \
             && cd /tmp/ss \
             && curl -sSL $SS_URL | tar xz --strip 1 \
             && ./configure --prefix=/usr --disable-documentation \
             && make install \
             \
-            && cd /tmp/obfs \
-            && curl -sSL $OBFS_URL | tar xz --strip 1 \
+            && cd /tmp/ \
+            && git clone $OBFS_URL simple-obfs \
+            && cd simple-obfs \
+            && git submodule update --init --recursive \
+            && ./autogen.sh \
             && ./configure --prefix=/usr --disable-documentation \
             && make install \
             \
