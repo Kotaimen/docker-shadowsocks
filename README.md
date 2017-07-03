@@ -4,11 +4,11 @@ Shadowsocks on alpine linux with simple http obfuscating , built from source.
 
 Tags:
 
-- `3.0.6`, `latest`: shadowsocks-libev with simple-obfs plugin on alpine 3.6
+- `3.0.7`, `latest`: shadowsocks-libev with simple-obfs plugin on alpine 3.6
+- `3.0.6`: shadowsocks-libev with simple-obfs plugin on alpine 3.6
 - `2.6.2`: shadowsocks-libev with simple-obfs plugin on alpine 3.5
 
-> Note: OTA is not available.
-
+> Note: OTA is not available on 3.x, use gcm encryption methods instead. 
 
 ## Usage
 
