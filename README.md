@@ -4,8 +4,7 @@ Shadowsocks on alpine linux with simple http obfuscating , built from source.
 
 Tags:
 
-- `3.0.7`, `latest`: shadowsocks-libev with simple-obfs plugin on alpine 3.6
-- `3.0.6`: shadowsocks-libev with simple-obfs plugin on alpine 3.6
+- `3.1.1`, `latest`: shadowsocks-libev with simple-obfs plugin on alpine 3.6
 - `2.6.2`: shadowsocks-libev with simple-obfs plugin on alpine 3.5
 
 > Note: OTA is not available on 3.x, use gcm encryption methods instead. 
@@ -27,13 +26,13 @@ Start server with:
         -p 0.0.0.0:8388:8388 \
         -e SHADOWSOCKS_SCERET=bob \
         -e SHADOWSOCKS_ENCRYPTIONMETHOD=aes-256-gcm \
-        kotaimen/shadowsocks:3.0.6
+        kotaimen/shadowsocks
     
 Start client with:
 
     docker run \
         -p 0.0.0.0:1080:1080 \
-        kotaimen/shadowsocks:3.0.6 \
+        kotaimen/shadowsocks \
         ss-local \
           -s bob.net \
           -p 80 \
